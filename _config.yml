@@ -16,36 +16,33 @@ lang: en
 prefer_datetime_locale:
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: America/New_York
+timezone: Georgia/Tbilisi
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Jadehawk's Tech Notes                          # the main title
+title: KaiKaci's Walktroughs                          # the main title
 
-tagline: A Small Collection Of Tutorials && Notes   # it will display as the sub-title
+tagline: An PicoCTF and HackTheBox Walktroughs  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A Small Collection Of Tutorials && Notes.
+  A Small Collection Of Walktroughs.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://jadehawk.github.io'
+url: 'https://kaikaci.github.io'
 
 github:
-  username: jadehawk             # change to your github username
-
-twitter:
-  username: twitter_username            # change to your twitter username
+  username: darkfears31            # change to your github username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Jadehawk
-  email: admin@jadehawk.net             # change to your email address
+  name: darkfears31
+  email: ofliman4@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
     #- https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/jadehawk       # change to your github homepage
+    - https://github.com/darkfears31      # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -83,7 +80,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://en.gravatar.com/userimage/47781659/da087a886659608ba4fe71e235732578.png
+avatar: https://avatars.githubusercontent.com/u/162694375?v=4
 
 # boolean type, the global switch for ToC in posts.
 toc: true
