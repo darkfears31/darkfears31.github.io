@@ -21,7 +21,7 @@ timezone: Georgia/Tbilisi
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: KaiKaci's Walktroughs                          # the main title
+title: darkfears31's Walktroughs                          # the main title
 
 tagline: An PicoCTF and HackTheBox Walktroughs  # it will display as the sub-title
 
@@ -29,7 +29,7 @@ description: >-                        # used by seo meta and the atom feed
   A Small Collection Of Walktroughs.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://kaikaci.github.io'
+url: 'https://darkfears31.github.io'
 
 github:
   username: darkfears31            # change to your github username
@@ -37,7 +37,7 @@ github:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: darkfears31
+  name: kaikaci
   email: ofliman4@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
