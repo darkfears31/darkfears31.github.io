@@ -175,10 +175,12 @@ Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
 ```
 So the password is
-> admin@it
+ admin@it
 Exploring the `.zip` file there is nothing interesting. We can use this password to try to login as `ash` and it works!
->User Flag is:
->fa4cbf19892c8bbb002e9042a35b333a
+User Flag is:
+```
+fa4cbf19892c8bbb002e9042a35b333a
+```
 now for privilege escalation
 ```bash
 ash@tabby:~$ id
@@ -235,7 +237,9 @@ $ lxc exec ignite /bin/sh
 /mnt/root/root # ls
 root.txt  snap
 ```
->Root Flag is:
->c2c3a98668aa4a106e8db9eff38adde9
+Root Flag is:
+```
+c2c3a98668aa4a106e8db9eff38adde9
+```
 ![](/assets/images/2024-09-09_21-02-30.png)
 
