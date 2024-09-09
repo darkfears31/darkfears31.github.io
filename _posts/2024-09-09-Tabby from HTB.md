@@ -187,8 +187,8 @@ ash@tabby:~$ id
 uid=1000(ash) gid=1000(ash) groups=1000(ash),4(adm),24(cdrom),30(dip),46(plugdev),116(lxd)
 ```
 Searching all that only with `lxd` we are able to do privilege escalation
-I will be using this ![hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation)
-and also ![hackingarticles](https://www.hackingarticles.in/lxd-privilege-escalation/)
+I will be using this https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation
+and also https://www.hackingarticles.in/lxd-privilege-escalation/
 Only one didn't work for me so i combined them and got root shell
 ```bash
 git clone  https://github.com/saghul/lxd-alpine-builder.git
